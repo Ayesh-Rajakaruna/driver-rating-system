@@ -1,0 +1,46 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg
+
+# Virtual environments
+venv/
+env/
+.venv/
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Data (raw sensor files can be large)
+data/raw/*
+data/processed/*
+data/labeled/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+!data/labeled/.gitkeep
+
+# Model artefacts
+outputs/models/*.pkl
+outputs/models/*.joblib
+
+# Logs
+*.log
+
+# Environment
+.env
