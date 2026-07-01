@@ -38,4 +38,8 @@ logging:
     com.uahdriveset.migration: INFO
 
 data:
-  path: "D:\Master\Master Project\DataSet\UAH-DRIVESET-v"
+  # YAML treats backslash as an escape character inside double-quoted strings, so raw
+  # Windows paths like "D:\Master\..." break the parser. Use forward slashes instead -
+  # Java's Path/File APIs accept them fine on Windows too - or wrap in single quotes,
+  # which YAML does not escape-process (e.g. 'D:\Master\Master Project\...').
+  path: "D:/Master/Master Project/DataSet/UAH-DRIVESET-v1"
