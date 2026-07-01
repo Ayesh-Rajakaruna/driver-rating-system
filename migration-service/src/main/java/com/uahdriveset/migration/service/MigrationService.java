@@ -6,6 +6,7 @@ import com.uahdriveset.migration.model.*;
 import com.uahdriveset.migration.repository.*;
 import com.uahdriveset.migration.service.parser.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -21,12 +22,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-/**
- * Orchestrates a full migration run: walks {datasetPath}/D*/{trip-folder}/*.txt,
- * upserts drivers/trips, and bulk-inserts the time-series tables.
- * Each trip is imported in its own transaction so one malformed trip folder
- * doesn't roll back the whole run.
- */
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -45,7 +40,10 @@ public class MigrationService {
     private final SemanticOnlineParser semanticOnlineParser;
     private final EventFileParser eventFileParser;
 
-    public MigrationResponse migrate(String datasetPath) {
+    @Value("${data.path}")
+    private String datasetPath;
+
+    public MigrationResponse migrate() {
         Instant start = Instant.now();
         Path root = Path.of(datasetPath);
         if (!Files.isDirectory(root)) {

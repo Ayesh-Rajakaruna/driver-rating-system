@@ -47,3 +47,8 @@ outputs/models/*.joblib
 
 # Environment
 .env
+
+#target
+.target/
+driver-rating-system/target/
+migration-service/target/

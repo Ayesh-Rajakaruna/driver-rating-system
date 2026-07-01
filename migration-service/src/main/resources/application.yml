@@ -6,9 +6,9 @@ spring:
     name: uah-driveset-migration-service
 
   datasource:
-    url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:uah_driveset}?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
-    username: ${DB_USERNAME:root}
-    password: ${DB_PASSWORD:root}
+    url: jdbc:mysql://localhost:3306/uah_driver_set_db?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    username: root
+    password: 1234
     driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:
       maximum-pool-size: 10
@@ -36,3 +36,6 @@ migration:
 logging:
   level:
     com.uahdriveset.migration: INFO
+
+data:
+  path: "D:\Master\Master Project\DataSet\UAH-DRIVESET-v"
