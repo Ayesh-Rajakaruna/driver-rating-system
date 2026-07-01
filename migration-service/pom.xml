@@ -19,6 +19,11 @@
 
     <properties>
         <java.version>17</java.version>
+        <!-- Spring Boot 3.3.4's managed Lombok version crashes on newer JDKs with
+             "java.lang.ExceptionInInitializerError: com.sun.tools.javac.code.TypeTag :: UNKNOWN".
+             Pinning a newer Lombok explicitly fixes it. If you're still on JDK 17/21 this also
+             works fine, so it's safe to keep even if you're not hitting the bug. -->
+        <lombok.version>1.18.36</lombok.version>
     </properties>
 
     <dependencies>
@@ -42,6 +47,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
             <optional>true</optional>
         </dependency>
         <dependency>
@@ -53,6 +59,19 @@
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>${lombok.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
